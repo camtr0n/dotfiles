@@ -36,8 +36,8 @@ alias get-pr-template="cat ~/Developer/netlify/data/.github/PULL_REQUEST_TEMPLAT
 alias 2xl="DBT_PROFILE_WAREHOUSE=transforming_2xl"
 
 # GitHub
-alias npr="gh pr create -a camtr0n --label '\''type::feature'\'' --web -F ~/Developer/replicated/data/.github/PULL_REQUEST_TEMPLATE/pull_request_template.md"
-alias lookerpr="gh pr create -a camtr0n --web --label '\''type::feature'\'' -F ~/Developer/replicated/data/.github/PULL_REQUEST_TEMPLATE/looker_pull_request_template.md"
+alias npr="gh pr create -a camtr0n --web --label 'type::feature' -F ~/Developer/replicated/data/.github/PULL_REQUEST_TEMPLATE/pull_request_template.md"
+alias lookerpr="gh pr create -a camtr0n --web --label 'type::feature' -F ~/Developer/replicated/data/.github/PULL_REQUEST_TEMPLATE/looker_pull_request_template.md"
 
 # Git
 alias gs="git status"
