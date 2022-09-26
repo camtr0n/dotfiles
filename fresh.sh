@@ -20,8 +20,8 @@ rm -rf $HOME/.zshrc
 ln -s $DEV/.dotfiles/.zshrc $HOME/.zshrc
 rm -rf $HOME/.gitignore_global
 ln -s $DEV/.dotfiles/.gitignore_global $HOME/.gitignore_global
-rm -rf $DEV/.oh-my-zsh/themes/
-ln -s $DEV/.dotfiles/themes/ $HOME/.oh-my-zsh/
+rm -rf $HOME/.oh-my-zsh/themes/
+ln -s $DEV/.dotfiles/themes $HOME/.oh-my-zsh/themes
 
 # Update Homebrew recipes
 brew update
