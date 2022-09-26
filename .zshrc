@@ -74,7 +74,7 @@ ZSH_THEME="agnoster"
 HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$DOTFILES
+ZSH_CUSTOM=$ZSH/custom
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -124,7 +124,7 @@ function slint() {
     echo 'Linting modified models...'
     files=$(git diff origin/main --name-only --diff-filter=ACMR | grep -E '(^models.*[.]sql$)' | tr '\n' ' ')
     echo $files | tr ' ' '\n'
-    sqlfluff lint $(echo $files)
+    sqlfluff lint $(echo $files)r
   else
     echo "Linting models: $@"
     sqlfluff lint $@ --exclude-rules L009
