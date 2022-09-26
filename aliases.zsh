@@ -1,44 +1,46 @@
 # Shortcuts
 alias copyssh="pbcopy < $HOME/.ssh/id_ed25519.pub"
-alias reloadshell="source $HOME/.zshrc"
+alias reload="source $HOME/.zshrc"
+alias df="subl $HOME/.dotfiles"
 alias reloaddns="dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 alias ll="/opt/homebrew/opt/coreutils/libexec/gnubin/ls -AhlFo --color --group-directories-first"
 alias phpstorm='open -a /Applications/PhpStorm.app "`pwd`"'
+alias pycharm='open -a /Applications/PyCharm.app "`pwd`"'
 alias shrug="echo '¯\_(ツ)_/¯' | pbcopy"
 alias c="clear"
-alias compile="commit 'compile'"
-alias version="commit 'version'"
+alias s='subl'
+
+# Navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 # Directories
 alias dotfiles="cd $DOTFILES"
 alias library="cd $HOME/Library"
-alias sites="cd $HOME/Sites"
-alias lara="sites && cd laravel/"
-alias docs="lara && cd docs/"
+alias desktop="cd $HOME/Desktop"
+alias work="cd $HOME/Developer/replicated/data"
 
-# Laravel
-alias a="php artisan"
-alias fresh="php artisan migrate:fresh --seed"
-alias tinker="php artisan tinker"
-alias seed="php artisan db:seed"
-alias serve="php artisan serve"
 
-# PHP
-alias cfresh="rm -rf vendor/ composer.lock && composer i"
-alias composer="php -d memory_limit=-1 /opt/homebrew/bin/composer"
+# dbt
+alias dbt_reset="dbt clean && dbt deps && ../scripts/get_dbt_prod_artifacts.sh && dbt ls -s state:modified --resource-type model"
+alias dra="dbt_refresh; dbt_data_refresh"
+alias dras="dbt clean; dbt deps; ../scripts/get_dbt_prod_artifacts.sh"
+alias dl="dbt ls -s state:modified"
+alias dr="dbt run -s state:modified"
+alias drm="dbt run -s"
+alias dt="dbt test -m state:modified" # --exclude test_name:relationships test_name:equal_rowcount
+alias dtm="dbt test" # --exclude test_name:relationships test_name:equal_rowcount -m
+alias drt="dr && dt"
+alias get-pr-template="cat ~/Developer/netlify/data/.github/PULL_REQUEST_TEMPLATE/dbt_model_changes.md | pbcopy"
+alias 2xl="DBT_PROFILE_WAREHOUSE=transforming_2xl"
 
-# JS
-alias nfresh="rm -rf node_modules/ package-lock.json && npm install"
-alias watch="npm run watch"
-
-# Docker
-alias docker-composer="docker-compose"
-
-# SQL Server
-alias mssql="docker run -e ACCEPT_EULA=Y -e SA_PASSWORD=LaravelWow1986! -p 1433:1433 mcr.microsoft.com/mssql/server:2017-latest"
+# GitHub
+alias npr="gh pr create -a camtr0n --label '\''type::feature'\'' --web -F ~/Developer/replicated/data/.github/PULL_REQUEST_TEMPLATE/pull_request_template.md"
+alias lookerpr="gh pr create -a camtr0n --web --label '\''type::feature'\'' -F ~/Developer/replicated/data/.github/PULL_REQUEST_TEMPLATE/looker_pull_request_template.md"
 
 # Git
-alias gst="git status"
+alias gs="git status"
 alias gb="git branch"
 alias gc="git checkout"
 alias gl="git log --oneline --decorate --color"
@@ -46,6 +48,8 @@ alias amend="git add . && git commit --amend --no-edit"
 alias commit="git add . && git commit -m"
 alias diff="git diff"
 alias force="git push --force"
+alias nah="git clean -df && git reset --hard"
+alias oops="git reset --soft HEAD~1"
 alias nuke="git clean -df && git reset --hard"
 alias pop="git stash pop"
 alias pull="git pull"

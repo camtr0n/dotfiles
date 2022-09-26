@@ -68,7 +68,7 @@ ZSH_THEME="minimal"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-HIST_STAMPS="dd/mm/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$DOTFILES
@@ -78,7 +78,7 @@ ZSH_CUSTOM=$DOTFILES
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(artisan git)
+plugins=(artisan git zsh-autosuggestions jump)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,3 +108,35 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+source ~/.dbt-completion.bash
+
+
+# Usage:
+# `sqllint` will check all git modified files
+# `sqllint path/to/file1 path/to/file2` will check specific files
+function slint() {
+  if [ $# -eq 0 ]; then
+    echo 'Linting modified models...'
+    files=$(git diff origin/main --name-only --diff-filter=ACMR | grep -E '(^models.*[.]sql$)' | tr '\n' ' ')
+    echo $files | tr ' ' '\n'
+    sqlfluff lint $(echo $files)
+  else
+    echo "Linting models: $@"
+    sqlfluff lint $@ --exclude-rules L009
+  fi
+}
+
+function sfix() {
+  if [ $# -eq 0 ]; then
+    echo 'Fixing modified models...'
+    files=$(git diff origin/main --name-only --diff-filter=ACMR | grep -E '(^models.*[.]sql$)' | tr '\n' ' ')
+    sqlfluff fix $(echo $files)
+  else
+    echo "Fixing models: $@"
+    sqlfluff fix $@ --exclude-rules L009
+  fi
+}
+
+source ~/.dbt-completion.bash
