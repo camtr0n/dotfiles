@@ -21,6 +21,9 @@ alias library="cd $HOME/Library"
 alias desktop="cd $HOME/Desktop"
 alias work="cd $HOME/Developer/replicated/data"
 
+# Path
+alias path='echo $PATH | tr -s ":" "\n"'
+alias cleanpath='typeset -U path && path'
 
 # dbt
 alias dbt_reset="dbt clean && dbt deps && ../scripts/get_dbt_prod_artifacts.sh && dbt ls -s state:modified --resource-type model"
@@ -58,3 +61,5 @@ alias resolve="git add . && git commit --no-edit"
 alias stash="git stash -u"
 alias unstage="git restore --staged ."
 alias wip="commit wip"
+alias main="git checkout main"
+alias last="git checkout -"

@@ -74,14 +74,24 @@ ZSH_THEME="agnoster"
 HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$ZSH/custom
+ZSH_CUSTOM=$DOTFILES
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions jump)
+plugins=(
+    aliases
+    python
+    pip
+    macos
+    git
+    jump
+    sudo
+    web-search
+    zsh-autosuggestions
+  )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -142,4 +152,6 @@ function sfix() {
   fi
 }
 
+
 source ~/.dbt-completion.bash
+source $DEV/.dotfiles/aliases.zsh
