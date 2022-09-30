@@ -32,7 +32,6 @@
 # adding variable for user symbol
 local user_symbol='%(!.#.$)'
 
-
 ### Segment drawing
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
@@ -76,6 +75,7 @@ prompt_segment() {
   [[ -n $3 ]] && echo -n $3
 }
 
+
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
@@ -93,7 +93,9 @@ prompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
   if [[ "$USERNAME" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
+    prompt_segment black default "%(!.%{%F{yellow}%}.)%n"
+    #prompt_segment black default "%(!.%{%F{yellow}%}.)%n@%m"
+
   fi
 }
 
@@ -214,7 +216,7 @@ prompt_dir() {
 # Virtualenv: current working virtualenv
 prompt_virtualenv() {
   if [[ -n "$VIRTUAL_ENV" && -n "$VIRTUAL_ENV_DISABLE_PROMPT" ]]; then
-    prompt_segment blue black "(${VIRTUAL_ENV:t:gs/%/%%})"
+    prompt_segment black white "(${VIRTUAL_ENV:t:gs/%/%%})"
   fi
 }
 
@@ -257,6 +259,7 @@ build_prompt() {
   prompt_bzr
   prompt_hg
   prompt_end
+  
 }
 
 PROMPT='╭─%{%f%b%k%}$(build_prompt)'

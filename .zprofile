@@ -17,6 +17,7 @@ export PATH=/opt/homebrew/anaconda3/bin:$PATH
 export CONDA_AUTO_ACTIVATE_BASE=false
 
 # pyenv
+export VIRTUAL_ENV_DISABLE_PROMPT=false
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"

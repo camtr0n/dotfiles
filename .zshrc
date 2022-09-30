@@ -151,7 +151,7 @@ function sfix() {
   fi
 }
 
-function pyenv_prompt_info() {
-    local version="$(pyenv version-name)"
-    echo "${version:gs/%/%%}"
-}
+#function pyenv_prompt_info() {
+#    local version="$(pyenv version-name)"
+#    echo "${version:gs/%/%%}"
+#}
