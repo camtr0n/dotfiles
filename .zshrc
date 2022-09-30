@@ -1,11 +1,8 @@
-#Path to development direction
-export DEV=$HOME/Developer
-
-# Path to your dotfiles.
-export DOTFILES=$DEV/.dotfiles
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -83,12 +80,14 @@ ZSH_CUSTOM=$DOTFILES
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     aliases
-    python
-    pip
-    macos
     git
     jump
+    macos
+    pip
+    python
+    #pyenv
     sudo
+    themes
     web-search
     zsh-autosuggestions
   )
@@ -152,6 +151,7 @@ function sfix() {
   fi
 }
 
-
-source ~/.dbt-completion.bash
-source $DEV/.dotfiles/aliases.zsh
+function pyenv_prompt_info() {
+    local version="$(pyenv version-name)"
+    echo "${version:gs/%/%%}"
+}

@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 echo "Setting up your Mac..."
 
 # Check for Oh My Zsh and install if we don't have it
@@ -15,9 +16,12 @@ if test ! $(which brew); then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
+# Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles (same with .zprofile)
 rm -rf $HOME/.zshrc
 ln -s $DEV/.dotfiles/.zshrc $HOME/.zshrc
+rm -rf $HOME/.zprofile
+ln -s $DEV/.dotfiles/.zprofile $HOME/.zprofile
+
 rm -rf $HOME/.gitignore_global
 ln -s $DEV/.dotfiles/.gitignore_global $HOME/.gitignore_global
 
