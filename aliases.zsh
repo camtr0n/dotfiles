@@ -20,6 +20,8 @@ alias dotfiles="cd $DOTFILES"
 alias library="cd $HOME/Library"
 alias desktop="cd $HOME/Desktop"
 alias work="cd $HOME/Developer/replicated/data"
+alias dev="cd $DEV"
+alias home="cd ~"
 
 # Path
 alias path='echo $PATH | tr -s ":" "\n"'
