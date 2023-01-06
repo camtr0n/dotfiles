@@ -170,5 +170,4 @@ function sfix() {
 
 autoload -U promptinit; promptinit
 zstyle :prompt:pure:git:stash show yes
-zstyle :prompt:pure:git:branch color cyan
 prompt pure
