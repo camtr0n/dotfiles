@@ -38,12 +38,11 @@ alias drm="dbt run -s"
 alias dt="dbt test -m state:modified" # --exclude test_name:relationships test_name:equal_rowcount
 alias dtm="dbt test" # --exclude test_name:relationships test_name:equal_rowcount -m
 alias drt="dr && dt"
-alias get-pr-template="cat ~/Developer/netlify/data/.github/PULL_REQUEST_TEMPLATE/dbt_model_changes.md | pbcopy"
+alias get-pr-template="cat ~/Developer/replicated/data/.github/pull_request_template.md | pbcopy"
 alias 2xl="DBT_PROFILE_WAREHOUSE=transforming_2xl"
 
 # GitHub
-alias npr="gh pr create -a camtr0n --web --label 'type::feature' -F ~/Developer/replicated/data/.github/PULL_REQUEST_TEMPLATE/pull_request_template.md"
-alias lookerpr="gh pr create -a camtr0n --web --label 'type::feature' -F ~/Developer/replicated/data/.github/PULL_REQUEST_TEMPLATE/looker_pull_request_template.md"
+alias npr="gh pr create -a camtr0n --web --label 'type::feature' -F ~/Developer/replicated/data/.github/pull_request_template.md"
 
 # Git
 alias gs="git status"
@@ -52,6 +51,7 @@ alias gc="git checkout"
 alias gl="git log --oneline --decorate --color"
 alias amend="git add . && git commit --amend --no-edit"
 alias commit="git add . && git commit -m"
+alias curr="git rev-parse --abbrev-ref HEAD"
 alias diff="git diff"
 alias force="git push --force"
 alias nah="git clean -df && git reset --hard"
@@ -64,5 +64,11 @@ alias resolve="git add . && git commit --no-edit"
 alias stash="git stash -u"
 alias unstage="git restore --staged ."
 alias wip="commit wip"
-alias main="git checkout main"
+alias main="git checkout main && pull"
+alias mmain="git merge main"
 alias last="git checkout -"
+alias recent="git recent -n 5"
+alias update="main && last && mmain"
+
+#Spectacles
+alias spec="spectacles sql -v --base-url $LOOKER_BASE_URL --client-id $LOOKER_CLIENT_ID --client-secret $LOOKER_CLIENT_SECRET --project replicated --branch 'cameronmoore/sc-65682/add-contract-links-to-start-date-in-dim-contracts'"

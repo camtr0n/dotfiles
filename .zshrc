@@ -18,6 +18,8 @@ export MNML_RPROMPT=('mnml_cwd 20')
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
 
+fpath+=("$(brew --prefix)/share/zsh/site-functions")
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -90,6 +92,7 @@ plugins=(
     themes
     web-search
     zsh-autosuggestions
+    zsh-syntax-highlighting
   )
 
 source $ZSH/oh-my-zsh.sh
@@ -131,9 +134,21 @@ source ~/.dbt-completion.bash
 function slint() {
   if [ $# -eq 0 ]; then
     echo 'Linting modified models...'
-    files=$(git diff origin/main --name-only --diff-filter=ACMR | grep -E '(^models.*[.]sql$)' | tr '\n' ' ')
+    files=$(git diff origin/main --name-only --diff-filter=ACMR | grep -E '(^models.*[.]sql$)' | cut -d'/' -f2- | tr '\n' ' ')
     echo $files | tr ' ' '\n'
-    sqlfluff lint $(echo $files)r
+    sqlfluff lint $(echo $files)
+  else
+    echo "Linting models: $@"
+    sqlfluff lint $@ --exclude-rules L009
+  fi
+}
+
+function lints() {
+  if [ $# -eq 0 ]; then
+    echo 'Linting modified models...'
+    files=$(git diff origin/main --name-only --diff-filter=ACMR | grep -E '(^models.*[.]sql$)' | cut -d'/' -f2- | tr '\n' ' ')
+    echo $files | tr ' ' '\n'
+    sqlfluff lint $(echo $files)
   else
     echo "Linting models: $@"
     sqlfluff lint $@ --exclude-rules L009
@@ -143,7 +158,7 @@ function slint() {
 function sfix() {
   if [ $# -eq 0 ]; then
     echo 'Fixing modified models...'
-    files=$(git diff origin/main --name-only --diff-filter=ACMR | grep -E '(^models.*[.]sql$)' | tr '\n' ' ')
+    files=$(git diff origin/main --name-only --diff-filter=ACMR | grep -E '(^models.*[.]sql$)' | cut -d'/' -f2- | tr '\n' ' ')
     sqlfluff fix $(echo $files)
   else
     echo "Fixing models: $@"
@@ -151,7 +166,9 @@ function sfix() {
   fi
 }
 
-#function pyenv_prompt_info() {
-#    local version="$(pyenv version-name)"
-#    echo "${version:gs/%/%%}"
-#}
+
+
+autoload -U promptinit; promptinit
+zstyle :prompt:pure:git:stash show yes
+zstyle :prompt:pure:git:branch color cyan
+prompt pure

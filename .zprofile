@@ -7,6 +7,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export DEV=$HOME/Developer
 export DOTFILES=$DEV/.dotfiles
 export PATH="$DOTFILES/bin:$PATH"
+export PATH="$DOTFILES/plugins/pure:$PATH"
+fpath+=($DOTFILES/plugins/pure)
 
 # sublime text
 export PATH="$PATH:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
@@ -23,3 +25,7 @@ export PATH="$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init - zsh)"
+
+# dbt
+export DBT_ARTIFACT_STATE_PATH=target/prod/
+export DBT_DEFER_TO_STATE=true

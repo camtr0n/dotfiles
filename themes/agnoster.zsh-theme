@@ -36,6 +36,7 @@ local user_symbol='%(!.#.$)'
 # A few utility functions to make it easy and re-usable to draw segmented prompts
 
 CURRENT_BG='NONE'
+CURRENT_BRANCH=$(curr)
 
 case ${SOLARIZED_THEME:-dark} in
     light) CURRENT_FG='white';;
@@ -142,6 +143,7 @@ prompt_git() {
     zstyle ':vcs_info:*' actionformats ' %u%c'
     vcs_info
     echo -n "${${ref:gs/%/%%}/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}"
+
   fi
 }
 
