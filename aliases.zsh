@@ -71,4 +71,4 @@ alias recent="git recent -n 5"
 alias update="main && last && mmain"
 
 #Spectacles
-alias spec="spectacles sql -v --base-url $LOOKER_BASE_URL --client-id $LOOKER_CLIENT_ID --client-secret $LOOKER_CLIENT_SECRET --project replicated --branch 'cameronmoore/sc-65682/add-contract-links-to-start-date-in-dim-contracts'"
+alias spec="spectacles lookml --base-url $LOOKER_BASE_URL --client-id $LOOKER_CLIENT_ID --client-secret $LOOKER_CLIENT_SECRET --project replicated --branch $CURRENT_BRANCH"
